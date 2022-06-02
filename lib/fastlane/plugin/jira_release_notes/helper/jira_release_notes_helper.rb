@@ -5,7 +5,13 @@ module Fastlane
       # as `Helper::JiraReleaseNotesHelper.your_method`
 
       def self.plain_format(issues)
-        issues.map { |i| "[#{i.key}] - #{i.summary}" } .join("\n")
+        issues
+          .group_by { |i| i.issuetype.name }
+          .map { |k, v| 
+            titles = v.map { |i| "[#{i.key}] - #{i.summary}" }.join("\n")
+            "#{k}:\n#{titles}"
+          }
+          .join("\n")
       end
 
       def self.html_format(issues, url)
