@@ -120,7 +120,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :version,
                                        env_name: "FL_JIRA_PROJECT_VERSION",
                                        description: "Jira project version",
-                                       sensitive: true,
+                                       sensitive: false,
                                        is_string: false,
                                        verify_block: proc do |value|
                                          UI.user_error!("'version' value must be a String or Regexp! Found #{value.class} instead.") unless value.kind_of?(String) || value.kind_of?(Regexp)
